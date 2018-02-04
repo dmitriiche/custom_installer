@@ -11,23 +11,20 @@ namespace custom_installer.ViewModel
     public class ButtonViewModel : INotifyPropertyChanged
     {
         protected bool _IsEnabled;
-        protected buttonCommand _Command;
+        protected RelayCommand _Command;
         protected string _text; 
 
         public ButtonViewModel()
-        {
-
-        }
+        {}
 
         public virtual ICommand Command
         {
             get { return _Command; }
             set
             {
-                _Command = value as buttonCommand;
+                _Command = value as RelayCommand;
                 NotifyPropertyChanged("Command");
-            }
-            
+            }  
         }
 
         public virtual bool IsEnabled
@@ -60,30 +57,6 @@ namespace custom_installer.ViewModel
                 var e = new PropertyChangedEventArgs(fieldname);
                 handler(this, e);
             }
-
-        }
-    }
-
-    public class buttonCommand : ICommand
-    {
-        Action<object> _execute;
-
-        public buttonCommand(Action<object> execute)
-        {
-            _execute = execute;
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-         //   throw new NotImplementedException();
-        }
-
-        public void Execute(object parameter)
-        {
-            _execute(parameter);
         }
     }
 }

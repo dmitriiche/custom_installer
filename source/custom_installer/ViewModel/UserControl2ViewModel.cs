@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using custom_installer.View;
 using custom_installer.Model;
 using System.Windows.Input;
-using Prism.Commands;
 using System.Windows.Forms;
 using System.IO;
 using System.Windows;
@@ -24,7 +23,7 @@ namespace custom_installer.ViewModel
             BackButton.IsEnabled = true;
             NextButton.IsEnabled = true;
 
-            SetDestination = new DelegateCommand(setDestination);
+            SetDestination = new RelayCommand(setDestination);
         }
 
         public string DestinationPath
@@ -33,11 +32,6 @@ namespace custom_installer.ViewModel
             {
                 string path  = DestinationModel.DestinationPath;
                 _destinationPath = DestinationModel.DestinationPath;
-                int max = 32;
-                if (path.Length > max)
-                {
-                    path = path.Substring(0, max) + "..." + path.Substring((path.Length - max), max);;
-                }
 
                 return path;
             }
@@ -52,7 +46,7 @@ namespace custom_installer.ViewModel
             }
         }
 
-        public override void ButtonNextClick()
+        public override void ButtonNextClick(object obj)
         {
             string question = String.Format("Are you sure you want to install files in to {0} directory?", DestinationModel.DestinationPath);
             if (System.Windows.MessageBox.Show(question, "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
@@ -66,7 +60,7 @@ namespace custom_installer.ViewModel
             Navigator.NavigationService.Navigate(userControl3);
         }
 
-        private void setDestination()
+        private void setDestination(object obj)
         {
             using (var dialog = new FolderBrowserDialog())
             {

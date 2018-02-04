@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Input;
 using custom_installer.Model;
 using custom_installer.View;
-using Prism.Commands;
 
 namespace custom_installer.ViewModel
 {
@@ -23,7 +22,7 @@ namespace custom_installer.ViewModel
             NextButton.IsEnabled = false;
 
             installationModel.PropertyChanged += InstallationModel_PropertyChanged;
-            OnLoadUserControll = new DelegateCommand(onLoaduserControll);
+            OnLoadUserControll = new RelayCommand(onLoaduserControll);
         }
 
         public int Progress
@@ -32,7 +31,7 @@ namespace custom_installer.ViewModel
             private set { }
         }
 
-        public override void ButtonNextClick()
+        public override void ButtonNextClick(object obj)
         {
             UserControl4_done userControl4 = new UserControl4_done();
             UserControl4ViewModel userControl4_viewModel = new UserControl4ViewModel();
@@ -40,17 +39,17 @@ namespace custom_installer.ViewModel
             Navigator.NavigationService.Navigate(userControl4);
         }
 
-        public override void ButtonCancelClick()
+        public override void ButtonCancelClick(object obj)
         {
             if (MessageBox.Show("Are you sure you want to cancel?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 installationModel.IsAborted = true;
             }
             
-            base.ButtonCancelClick();
+            base.ButtonCancelClick(obj);
         }
 
-        private void onLoaduserControll()
+        private void onLoaduserControll(object obj)
         {
             installationModel.RunCopyTask();
         }

@@ -15,7 +15,7 @@ namespace custom_installer.ViewModel
             CancelButton.Text = "Exit";
         }
 
-        public override void ButtonNextClick()
+        public override void ButtonNextClick(object obj)
         {
         }
     }

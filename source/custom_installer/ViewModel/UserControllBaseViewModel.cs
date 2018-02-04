@@ -15,8 +15,7 @@ namespace custom_installer.ViewModel
         protected ButtonViewModel _buttonNext;
 
         public UserControllBaseViewModel()
-        {
-        }
+        {}
 
         public virtual ButtonViewModel CancelButton
         {
@@ -28,7 +27,7 @@ namespace custom_installer.ViewModel
                     {
                         IsEnabled = true,
                         Text = "Cancel",
-                        Command = new buttonCommand(param => ButtonCancelClick())
+                        Command = new RelayCommand(ButtonCancelClick)
                     };
                 }
                 return _buttonCancel;
@@ -50,7 +49,7 @@ namespace custom_installer.ViewModel
                     {
                         IsEnabled = true,
                         Text = "Back",
-                        Command = new buttonCommand(param => ButtonBacklClick())
+                        Command = new RelayCommand(ButtonBacklClick)
                     };
                 }
                 return _buttonBack;
@@ -72,7 +71,7 @@ namespace custom_installer.ViewModel
                     {
                         IsEnabled = true,
                         Text = "Next",
-                        Command = new buttonCommand(param => ButtonNextClick())
+                        Command = new RelayCommand(ButtonNextClick)
                     };
                 }
                 return _buttonNext;
@@ -84,21 +83,20 @@ namespace custom_installer.ViewModel
             }
         }
 
-
         /// <summary>
         /// Button lambda functions
         /// </summary>
-        public virtual void ButtonBacklClick()
+        public virtual void ButtonBacklClick(object obj)
         {
             Navigator.NavigationService.GoBack();
         }
 
-        public virtual void ButtonCancelClick()
+        public virtual void ButtonCancelClick(object obj)
         {
             Navigator.Cancel();
         }
 
-        public abstract void ButtonNextClick();
+        public abstract void ButtonNextClick(object obj);
 
         public event PropertyChangedEventHandler PropertyChanged;
 

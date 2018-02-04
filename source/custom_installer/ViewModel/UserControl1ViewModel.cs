@@ -14,7 +14,7 @@ namespace custom_installer.ViewModel
             BackButton.IsEnabled = false;
         }
 
-        public override void ButtonNextClick()
+        public override void ButtonNextClick(object obj)
         {
             UserControl2_setup userControl2 = new UserControl2_setup();
             UserControl2ViewModel userControll2_viewModel = new UserControl2ViewModel();

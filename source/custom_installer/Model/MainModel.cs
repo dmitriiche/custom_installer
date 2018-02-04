@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace custom_installer.Model
 {
+    /// <summary>
+    /// MainModel implements INotifyPropertyChanged interface for notify proressbar about progress changes.
+    /// </summary>
     public class MainModel : INotifyPropertyChanged
     {
         private bool _isaborted;
@@ -32,6 +35,9 @@ namespace custom_installer.Model
             set { }
         }
 
+        /// <summary>
+        ///  Progres bar simply realization.
+        /// </summary>
         public int Progress
         {
             get { return Decimal.ToInt32(Decimal.Round(_progress)); }
@@ -127,13 +133,15 @@ namespace custom_installer.Model
         }
     }
 
+    /// <summary>
+    /// Static class that keep destination path string, for later use in the MainModelinstance.
+    /// </summary>
     public static class DestinationModel
     {
         private static string _destination_path;
 
         static DestinationModel()
         {
-            //_destination_path = "";//System.AppDomain.CurrentDomain.BaseDirectory.ToString();
             _destination_path = System.AppDomain.CurrentDomain.BaseDirectory.ToString();
         }
 
